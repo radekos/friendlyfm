@@ -1,10 +1,30 @@
+body {
+    background-color: #0E0B16;
+}
+
 .line-item {
-  background-color: white;
+  background-color: #0E0B16;
   padding: 20px;
   margin: 2px;
-  color: #111111;
+  color: #E7DFDD;
   display: flex;
   align-items: center;
-  border: 1px #111111 solid;
+  border: 1px #A239Ca solid;
   justify-content: space-evenly;
+}
+
+a:link {
+  color: #E7DFDD;
+}
+
+a:visited {
+  color: #E7DFDD;
+}
+
+a:hover {
+  color: rgb(88, 87, 88);
+}
+
+a:active {
+  color: #E7DFDD;
 }
