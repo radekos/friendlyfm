@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Loader.css';
 
 class App extends Component {
   constructor(props) {
@@ -74,12 +75,26 @@ class App extends Component {
       )
   }
 
+  //Check if each user is listening
+  isCurrentlyListening(track) {
+    //Need to check the date has a value
+    if(track[0].date != null) {
+
+      let timeInMs = parseInt(track[0].date.uts);
+      let date = new Date();
+      let currentTime = date.getTime(); 
+
+      if(currentTime > timeInMs + 60000) {
+        return false;
+      }
+    }
+    else{
+      return true;
+    }
+  }
+
   componentDidMount() {
-
-
     this.interval = setInterval(() => this.getData(), 5000);
-
-
   }
 
   componentWillUnmount() {
@@ -108,17 +123,21 @@ class App extends Component {
       {
         return (
           <div>
-            {items.map(item => (
+            {items.map(item => (             
               <div key={item['@attr'].user} className="line-item">
-                <span>{item['@attr'].user}</span> <span><img alt="" src={item.track[0].image[1]['#text']}/> {item.track[0].artist['#text']} - {item.track[0].name}</span> 
-              </div>
-            ))}
+                <a target="_blank" href={'https://www.last.fm/user/'+item['@attr'].user}>{item['@attr'].user}</a>      
+                {this.isCurrentlyListening(item.track) == false &&
+                  <span>{item['@attr'].user} is not currently listening, last song played:</span>                  
+                }
+                <span><img alt="" src={item.track[0].image[1]['#text']}/> {item.track[0].artist['#text']} - {item.track[0].name}</span> 
+                </div>
+          ))}
           </div>
         );
       }
       else
       {
-        return <div>Loadingu...</div>;
+        return <div className="loader">Loading...</div>
       }
     }
   }
