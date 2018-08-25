@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './Loader.css';
 
 class App extends Component {
   constructor(props) {
@@ -118,7 +119,7 @@ class App extends Component {
       }
       else
       {
-        return <div>Loadingu...</div>;
+        return <div className="loader">Loading...</div>
       }
     }
   }
