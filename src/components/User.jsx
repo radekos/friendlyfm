@@ -6,50 +6,17 @@ class User extends React.Component {
     super(props)
     this.state = {
       apiKey: "fc05c9fdbe7159bbb7865e7a0758f727",
-
       error: null,
-      isLoaded: false,
-      item: {}
+      item: this.props.user,
     }
   }
-
-  getData() {
-    console.log("Fetching data for: ", this.props.user)
-    fetch("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&limit=1&user=" + this.props.user + "&api_key=" + this.state.apiKey + "&format=json")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          console.log("Result: ", result)
-          this.setState({
-            item: result.recenttracks,
-            isLoaded: true
-          })
-          this.forceUpdate();
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => this.getData(), 5000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
 
   //Check if each user is listening
   isCurrentlyListening(track) {
     //Need to check the date has a value
-    if (track[0].date != null) {
+    if (track != null) {
 
-      let timeInMs = parseInt(track[0].date.uts);
+      let timeInMs = parseInt(track['@attr'].uts);
       let date = new Date();
       let currentTime = date.getTime();
 
@@ -63,21 +30,18 @@ class User extends React.Component {
   }
 
   render() {
-    const { item, isLoaded } = this.state
+    const { item } = this.state
 
     return (
       <div className="line-item">
-        {isLoaded ?
+        {
           <RecentTrack
-            user={item['@attr'].user}
-            currentlyListening={this.isCurrentlyListening(item.track)}
-            image={item.track[0].image[1]['#text']}
-            artist={item.track[0].artist['#text']}
-            trackName={item.track[0].name}
+            user={item.name}
+            currentlyListening={this.isCurrentlyListening(item.recenttrack)}
+            image={""}
+            artist={item.recenttrack.artist.name}
+            trackName={item.recenttrack.name}
           />
-          :
-          <div className="loader">Loading...</div>
-        
         }
         </div>
 

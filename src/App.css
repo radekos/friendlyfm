@@ -26,3 +26,23 @@ a:hover {
 a:active {
   color: #E7DFDD;
 }
+
+.form-group
+{
+  max-width: 400px;
+}
+
+.form-group label
+{
+  color: white;
+}
+
+.form-group small
+{
+  color: white;
+}
+
+#noFriends
+{
+  color: green;
+}
