@@ -16,17 +16,26 @@ class User extends React.Component {
     //Need to check the date has a value
     if (track != null) {
 
-      let timeInMs = parseInt(track['@attr'].uts);
-      let date = new Date();
-      let currentTime = date.getTime();
-
-      if (currentTime > timeInMs + 60000) {
-        return false;
+      if (track['@attr'] != undefined)
+      {
+        return true;
+      }
+      else
+      {
+        let timeInMs = parseInt(track['date'].uts);
+        let date = new Date();
+        let currentTime = date.getTime();
+  
+        if (currentTime > timeInMs + 60000) {
+          return false;
+        }
       }
     }
     else {
       return true;
     }
+
+    return true;
   }
 
   render() {
@@ -38,8 +47,8 @@ class User extends React.Component {
           <RecentTrack
             user={item.name}
             currentlyListening={this.isCurrentlyListening(item.recenttrack)}
-            image={""}
-            artist={item.recenttrack.artist.name}
+            image={item.recenttrack.image.name}
+            artist={item.recenttrack.artist['#text']}
             trackName={item.recenttrack.name}
           />
         }
