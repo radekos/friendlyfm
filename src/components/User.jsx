@@ -8,31 +8,21 @@ class User extends React.Component {
       apiKey: "fc05c9fdbe7159bbb7865e7a0758f727",
       error: null,
       item: this.props.user,
+      handleRemove: this.props.handleRemove
     }
   }
 
   //Check if each user is listening
   isCurrentlyListening(track) {
     //Need to check the date has a value
-    if (track != null) {
+    if (track) {
+      let timeInMs = parseInt(track, 10);
+      let date = new Date();
+      let currentTime = date.getTime();
 
-      if (track['@attr'] != undefined)
-      {
-        return true;
+      if (currentTime > timeInMs + 60000) {
+        return false;
       }
-      else
-      {
-        let timeInMs = parseInt(track['date'].uts);
-        let date = new Date();
-        let currentTime = date.getTime();
-  
-        if (currentTime > timeInMs + 60000) {
-          return false;
-        }
-      }
-    }
-    else {
-      return true;
     }
 
     return true;
@@ -41,20 +31,26 @@ class User extends React.Component {
   render() {
     const { item } = this.state
 
-    return (
-      <div className="line-item">
-        {
-          <RecentTrack
-            user={item.name}
-            currentlyListening={this.isCurrentlyListening(item.recenttrack)}
-            image={item.recenttrack.image.name}
-            artist={item.recenttrack.artist['#text']}
-            trackName={item.recenttrack.name}
-          />
-        }
-        </div>
-
-    )
+    if (item.recenttrack)
+    {
+      return (
+        <div className="line-item">
+          {
+            <RecentTrack
+              user={item.name}
+              currentlyListening={this.isCurrentlyListening(item.recenttrack.date)}
+              image={item.recenttrack.imageName}
+              artist={item.recenttrack.artistName}
+              trackName={item.recenttrack.name}
+              handleRemove={this.state.handleRemove}
+            />
+          }
+          </div>
+  
+      )
+    }
+    
+    return null;
   }
 }
 
