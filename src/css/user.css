@@ -5,6 +5,38 @@
     align-items: center;
 }
 
+@media only screen and (max-width: 600px) {
+    .recenttrack-row
+    {
+        flex-direction: column;
+    }
+
+    .first-column
+    {
+        flex-direction: column;
+    }
+
+    .second-column
+    {
+        flex-direction: column;
+    }
+
+    .name
+    {
+        justify-content: space-between;
+        margin-left: 0px;
+        margin-right: 15px;
+        font-size: 1.2em;
+    }
+
+    .deleteButton
+    {
+        justify-content: space-between;
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+}
+
 .line-item 
 {
     background-color: #252521;
@@ -78,8 +110,8 @@ a:active
 
 .icon
 {
-    width: 25%;
-    height: 25%;
+    width: 75%;
+    height: 75%;
     min-width: 50px;
     min-height: 50px;
     max-width: 100px;

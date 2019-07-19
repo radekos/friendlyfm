@@ -1,5 +1,7 @@
 body {
     background-color: rgb(19, 20, 14);
+
+    overflow-y: auto;
 }
 
 .form-group

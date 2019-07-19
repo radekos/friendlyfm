@@ -15,7 +15,9 @@ const RecentTrack = (props) => {
       </div>
 
       <div className="second-column">
-        <img alt="" src={image} className="icon"/>
+        <div>
+          <img alt="" src={image} className="icon"/>
+        </div>
         <div className="title">
           <div className="artist">{artist}</div> {trackName}
         </div>
