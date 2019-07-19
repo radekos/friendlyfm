@@ -1,0 +1,111 @@
+.recenttrack-row
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.line-item 
+{
+    background-color: #252521;
+    margin-bottom: 5px;
+    padding: 10px;
+    color: #E7DFDD;
+    transition: all 0.5s ease;
+    filter: brightness(1);
+}
+
+.line-item:hover
+{
+    filter: brightness(1.1);
+}
+
+.line-item-inactive
+{    
+    background-color: #252521;
+    margin-bottom: 5px;
+    padding: 10px;
+    color: #E7DFDD;
+    transition: all 0.5s ease;
+    filter: brightness(0.65);
+}
+
+.line-item-inactive:hover
+{
+    filter: brightness(1.1);
+}
+
+a:link 
+{
+    color: #E7DFDD;
+}
+
+a:visited 
+{
+    color: #E7DFDD;
+}
+
+a:hover 
+{
+    color: rgb(149, 202, 142);
+}
+
+a:active 
+{
+    color: #E7DFDD;
+}
+
+.first-column
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex: 1;
+}
+
+.second-column
+{
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+}
+
+.row
+{
+
+}
+
+.icon
+{
+    width: 25%;
+    height: 25%;
+    min-width: 50px;
+    min-height: 50px;
+    max-width: 100px;
+    max-height: 100px;
+}
+
+.name
+{
+    padding-left: 25px;
+    font-size: 1.2em;
+}
+
+.title
+{
+    margin-left: 25px;
+    font-size: 1.2em;
+}
+
+.artist
+{
+    color: rgb(126, 197, 142);
+    font-weight: bold;
+}
+
+.deleteButton
+{
+    margin-left: auto;
+    margin-right: 50px;
+}

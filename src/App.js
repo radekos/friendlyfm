@@ -25,8 +25,7 @@ class App extends Component {
     this.state = {
       apiKey: "fc05c9fdbe7159bbb7865e7a0758f727",
       users: this.restoreFriends(),
-      isFetching: false,
-      hasContent: false
+      isFetching: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
@@ -47,8 +46,6 @@ class App extends Component {
 
   getData()
   {
-    var index = 0;
-
     this.state.users.forEach(element => 
     {
       fetch("https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user="
@@ -78,21 +75,6 @@ class App extends Component {
               users[foundUserId] = foundUser;
               this.setState({users: users});
             }
-            else
-            {
-              this.removeFriend(element.name);
-            }
-          }
-          else
-          {
-            this.removeFriend(element.name);
-          }
-
-          index++;
-
-          if (index === this.state.users.length - 1)
-          {
-            this.setState({hasContent: true});
           }
         }
       )
@@ -108,17 +90,13 @@ class App extends Component {
   componentDidMount()
   {
     this.getData();
-    
     document.addEventListener(visibilityChange, this.handleVisibilityChange, false);
-    console.log("Component Mounted");
   }
 
   componentWillUnmount() {
     this.setState({isFetching: false});
     clearInterval(this.interval);
     document.removeEventListener(visibilityChange, this.handleVisibilityChange);
-
-    console.log("Component Unmounted");
   }
 
   handleVisibilityChange = () => {

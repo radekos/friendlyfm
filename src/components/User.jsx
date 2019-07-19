@@ -1,5 +1,6 @@
 import React from "react"
 import RecentTrack from "./RecentTrack"
+import '../css/user.css'
 
 class User extends React.Component {
   constructor(props) {
@@ -31,14 +32,18 @@ class User extends React.Component {
   render() {
     const { item } = this.state
 
-    if (item.recenttrack)
+    if (item.recenttrack.name)
     {
+      var activeState = "line-item";
+
+      if (!this.isCurrentlyListening(item.recenttrack.date))
+        activeState = "line-item-inactive"
+
       return (
-        <div className="line-item">
+        <div className={activeState}>
           {
             <RecentTrack
               user={item.name}
-              currentlyListening={this.isCurrentlyListening(item.recenttrack.date)}
               image={item.recenttrack.imageName}
               artist={item.recenttrack.artistName}
               trackName={item.recenttrack.name}
@@ -46,7 +51,6 @@ class User extends React.Component {
             />
           }
           </div>
-  
       )
     }
     
